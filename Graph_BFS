@@ -1,0 +1,63 @@
+//BREADTH-FIRST-SEARCH OF GRAPH WHICH IS REPRESENTED USING THE ADJACENCY LIST 
+//TIME-COMPLEXITY=O(nodes+edges) 
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+void breadthFirstSearch(vector<ll>adj_list[],ll nodes,ll starting_node){
+	bool visited[nodes];
+	for(ll i=0;i<nodes;i++)
+		visited[i]=false;
+
+	queue<ll> q;
+	q.push(starting_node);
+	visited[starting_node]=true;
+
+	while(!q.empty()){
+		ll temp=q.front();
+		cout<<temp<<" ";
+		q.pop();
+
+			
+		for(ll j=0;j<adj_list[temp].size();j++){
+			if(visited[adj_list[temp][j]]==false){
+				q.push(adj_list[temp][j]);
+				visited[adj_list[temp][j]]=true;
+			}
+		}
+
+	}
+	
+}
+
+
+int main(){
+	cout<<"Enter number of nodes-:";
+	ll nodes{0};
+	cin>>nodes;
+
+	vector<ll> adj_list[nodes];
+
+	cout<<"Enter the number of edges-:";
+	ll edges{0};
+	cin>>edges;
+
+	//representation of graph using the adjacency-list(i.e. using array of vector) 
+	for(ll i=0;i<edges;i++){
+		cout<<"Enter the end points of edge-"<<(i+1)<<"-:";
+		ll u{0};
+		ll v{0};
+		cin>>u>>v;
+		adj_list[u].push_back(v);
+		adj_list[v].push_back(u);
+	}
+
+	cout<<"enter the starting node for the BFS-:";
+	ll starting_node{0};
+	cin>>starting_node;
+	breadthFirstSearch(adj_list,nodes,starting_node);
+
+
+	return 0;
+}
+
